@@ -81,6 +81,65 @@ p{
         0 0 30px rgba(255,203,5,1);
 }
 
+/* KOLOM STATISTIK */
+
+.stats-box{
+    margin-top:50px;
+    width:550px;
+    max-width:90%;
+
+    background:rgba(0,0,0,0.65);
+    backdrop-filter:blur(8px);
+
+    border-radius:20px;
+    padding:25px;
+
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.stats-box h2{
+    margin-bottom:25px;
+    color:#ffcb05;
+}
+
+.chart{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.bar{
+    height:45px;
+    border-radius:30px;
+
+    display:flex;
+    align-items:center;
+
+    padding-left:15px;
+    font-weight:bold;
+}
+
+.hp{
+    width:90%;
+    background:#4CAF50;
+}
+
+.attack{
+    width:75%;
+    background:#ff5722;
+}
+
+.defense{
+    width:65%;
+    background:#2196F3;
+}
+
+.speed{
+    width:85%;
+    background:#ffcb05;
+    color:black;
+}
+
 </style>
 </head>
 
@@ -93,6 +152,32 @@ p{
 <a href="login.html" class="login-btn">
     LOGIN
 </a>
+
+<div class="stats-box">
+
+    <h2>STATISTIK POKEMON</h2>
+
+    <div class="chart">
+
+        <div class="bar hp">
+            HP 90%
+        </div>
+
+        <div class="bar attack">
+            ATTACK 75%
+        </div>
+
+        <div class="bar defense">
+            DEFENSE 65%
+        </div>
+
+        <div class="bar speed">
+            SPEED 85%
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
