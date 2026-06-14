@@ -17,11 +17,9 @@
 body{
     width:100%;
     min-height:100vh;
-
     display:flex;
     flex-direction:column;
     align-items:center;
-
     font-family:Arial,sans-serif;
     color:white;
     text-align:center;
@@ -31,6 +29,8 @@ body{
     background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
+
+    transition:0.5s;
 }
 
 /* HALAMAN AWAL */
@@ -38,49 +38,34 @@ body{
 h1{
     margin-top:20px;
     font-size:55px;
-    font-weight:bold;
     text-shadow:0 0 10px rgba(0,0,0,.8);
 }
 
-p{
+#teksUtama{
     margin-top:20px;
     font-size:28px;
-    text-shadow:0 0 10px rgba(0,0,0,.8);
 }
 
 .login-btn{
     margin-top:40px;
     padding:15px 55px;
-
     border:none;
     border-radius:50px;
-
     background:linear-gradient(90deg,#ffcb05,#ff9500);
-
     color:black;
     font-size:22px;
     font-weight:bold;
-
     cursor:pointer;
-
-    box-shadow:0 0 20px rgba(255,203,5,.8);
-}
-
-.login-btn:hover{
-    transform:scale(1.05);
 }
 
 /* STATISTIK */
 
 .stats-box{
     margin-top:40px;
-
     width:550px;
     max-width:90%;
-
     background:rgba(0,0,0,.65);
     backdrop-filter:blur(8px);
-
     border-radius:20px;
     padding:25px;
 }
@@ -99,10 +84,8 @@ p{
 .bar{
     height:45px;
     border-radius:30px;
-
     display:flex;
     align-items:center;
-
     padding-left:15px;
     font-weight:bold;
 }
@@ -128,32 +111,24 @@ p{
     color:black;
 }
 
-/* LOGIN POPUP */
+/* LOGIN */
 
 .modal{
     display:none;
-
     position:fixed;
     top:0;
     left:0;
-
     width:100%;
     height:100%;
-
     background:rgba(0,0,0,.7);
-
     justify-content:center;
     align-items:center;
 }
 
 .login-box{
     width:380px;
-    max-width:90%;
-
-    background:rgba(20,20,20,.95);
-
+    background:#1f1f1f;
     padding:30px;
-
     border-radius:20px;
 }
 
@@ -164,10 +139,8 @@ p{
 
 .login-box input{
     width:100%;
-
     padding:15px;
     margin-bottom:15px;
-
     border:none;
     border-radius:10px;
 }
@@ -175,87 +148,60 @@ p{
 .submit-btn{
     width:100%;
     padding:15px;
-
     border:none;
     border-radius:50px;
-
     background:linear-gradient(90deg,#ffcb05,#ff9500);
-
     font-weight:bold;
     cursor:pointer;
 }
 
 .close-btn{
     margin-top:10px;
-
     background:none;
     border:none;
-
     color:white;
     cursor:pointer;
 }
 
 #error{
-    color:#ff4d4d;
     margin-top:10px;
+    color:red;
 }
 
 /* MENU SETELAH LOGIN */
 
 .menu-bebas{
     display:none;
-
-    margin-top:80px;
-
+    margin-top:100px;
     width:500px;
     max-width:90%;
 }
 
 .menu-btn{
     width:100%;
-
-    padding:18px;
-
+    padding:20px;
     border:none;
     border-radius:15px;
-
-    background:linear-gradient(
-        90deg,
-        #ffcb05,
-        #ff9500
-    );
-
+    background:linear-gradient(90deg,#ffcb05,#ff9500);
     color:black;
-
-    font-size:22px;
+    font-size:24px;
     font-weight:bold;
-
     cursor:pointer;
 }
 
 .content-box{
     display:none;
-
     margin-top:20px;
-
     width:600px;
     max-width:90%;
-
-    background:rgba(0,0,0,.75);
-
+    background:white;
+    color:black;
+    padding:30px;
     border-radius:20px;
-
-    padding:25px;
 }
 
 .content-box h2{
-    color:#ffcb05;
     margin-bottom:15px;
-}
-
-.content-box p{
-    font-size:18px;
-    margin-top:10px;
 }
 
 </style>
@@ -264,73 +210,59 @@ p{
 <body>
 
 <h1 id="judulUtama">
-    SELAMAT DATANG DI DUNIA POKEMON
+SELAMAT DATANG DI DUNIA POKEMON
 </h1>
 
 <p id="teksUtama">
-    沒錢沒用
+沒錢沒用
 </p>
 
 <button
 id="btnLogin"
 class="login-btn"
 onclick="openLogin()">
-
-    LOGIN
-
+LOGIN
 </button>
 
 <div id="statsBox" class="stats-box">
 
-    <h2>STATISTIK POKEMON</h2>
+<h2>STATISTIK POKEMON</h2>
 
-    <div class="chart">
+<div class="chart">
 
-        <div class="bar hp">
-            HP 90%
-        </div>
+<div class="bar hp">HP 90%</div>
 
-        <div class="bar attack">
-            ATTACK 75%
-        </div>
+<div class="bar attack">ATTACK 75%</div>
 
-        <div class="bar defense">
-            DEFENSE 65%
-        </div>
+<div class="bar defense">DEFENSE 65%</div>
 
-        <div class="bar speed">
-            SPEED 85%
-        </div>
-
-    </div>
+<div class="bar speed">SPEED 85%</div>
 
 </div>
 
-<!-- MENU SETELAH LOGIN -->
+</div>
+
+<!-- MENU LOGIN BERHASIL -->
 
 <div id="menuBebas" class="menu-bebas">
 
-    <button
-    class="menu-btn"
-    onclick="showContent()">
+<button
+class="menu-btn"
+onclick="showContent()">
 
-        BEBAS ISI APAPUN
+BEBAS ISI APAPUN
 
-    </button>
+</button>
 
 </div>
 
 <div id="contentBox" class="content-box">
 
-    <h2>BEBAS ISI APAPUN</h2>
+<h2>BEBAS ISI APAPUN</h2>
 
-    <p>
-        Selamat datang.
-        Login berhasil.
-
-        Anda dapat mengisi bagian ini
-        dengan informasi apa saja.
-    </p>
+<p>
+Silakan isi konten apa saja di sini.
+</p>
 
 </div>
 
@@ -338,104 +270,74 @@ onclick="openLogin()">
 
 <div class="modal" id="loginModal">
 
-    <div class="login-box">
+<div class="login-box">
 
-        <h2>LOGIN POKEMON</h2>
+<h2>LOGIN POKEMON</h2>
 
-        <input
-        type="text"
-        id="userid"
-        placeholder="Masukkan ID">
+<input
+type="text"
+id="userid"
+placeholder="Masukkan ID">
 
-        <input
-        type="password"
-        id="password"
-        placeholder="Masukkan Password">
+<input
+type="password"
+id="password"
+placeholder="Masukkan Password">
 
-        <button
-        class="submit-btn"
-        onclick="login()">
+<button
+class="submit-btn"
+onclick="login()">
 
-            MASUK
+MASUK
 
-        </button>
+</button>
 
-        <button
-        class="close-btn"
-        onclick="closeLogin()">
+<button
+class="close-btn"
+onclick="closeLogin()">
 
-            Tutup
+Tutup
 
-        </button>
+</button>
 
-        <p id="error"></p>
+<p id="error"></p>
 
-    </div>
+</div>
 
 </div>
 
 <script>
 
 function openLogin(){
-
-    document.getElementById(
-    "loginModal"
-    ).style.display="flex";
-
+    document.getElementById("loginModal").style.display="flex";
 }
 
 function closeLogin(){
-
-    document.getElementById(
-    "loginModal"
-    ).style.display="none";
-
+    document.getElementById("loginModal").style.display="none";
 }
 
 function login(){
 
-    let id =
-    document.getElementById(
-    "userid"
-    ).value;
+    let id=document.getElementById("userid").value;
+    let pass=document.getElementById("password").value;
 
-    let pass =
-    document.getElementById(
-    "password"
-    ).value;
-
-    if(
-        id==="admin" &&
-        pass==="12345"
-    ){
+    if(id==="admin" && pass==="12345"){
 
         closeLogin();
 
-        document.getElementById(
-        "judulUtama"
-        ).style.display="none";
+        document.getElementById("judulUtama").style.display="none";
+        document.getElementById("teksUtama").style.display="none";
+        document.getElementById("btnLogin").style.display="none";
+        document.getElementById("statsBox").style.display="none";
 
-        document.getElementById(
-        "teksUtama"
-        ).style.display="none";
+        document.body.style.backgroundImage="none";
+        document.body.style.backgroundColor="#87CEEB";
 
-        document.getElementById(
-        "btnLogin"
-        ).style.display="none";
-
-        document.getElementById(
-        "statsBox"
-        ).style.display="none";
-
-        document.getElementById(
-        "menuBebas"
-        ).style.display="block";
+        document.getElementById("menuBebas").style.display="block";
 
     }else{
 
-        document.getElementById(
-        "error"
-        ).innerHTML=
+        document.getElementById("error").innerHTML=
         "ID atau Password Salah!";
 
     }
@@ -443,9 +345,7 @@ function login(){
 
 function showContent(){
 
-    document.getElementById(
-    "contentBox"
-    ).style.display="block";
+    document.getElementById("contentBox").style.display="block";
 
 }
 
