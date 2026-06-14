@@ -22,10 +22,34 @@
             min-height:100vh;
         }
 
+        .zeus-container{
+            padding-top:40px;
+        }
+
+        .zeus{
+            width:220px;
+            animation:float 3s ease-in-out infinite;
+            filter:drop-shadow(0 0 20px gold);
+        }
+
+        @keyframes float{
+            0%{
+                transform:translateY(0);
+            }
+
+            50%{
+                transform:translateY(-15px);
+            }
+
+            100%{
+                transform:translateY(0);
+            }
+        }
+
         h1{
-            padding-top:150px;
             font-size:48px;
             text-shadow:2px 2px 8px black;
+            margin-top:20px;
         }
 
         p{
@@ -55,6 +79,10 @@
 </head>
 
 <body>
+
+    <div class="zeus-container">
+        <img src="zeus.png" alt="Zeus" class="zeus">
+    </div>
 
     <h1>SELAMAT DATANG DI DUNIA TIPUAN</h1>
 
