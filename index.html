@@ -176,9 +176,63 @@ p{
     cursor:pointer;
 }
 
-#error{
-    margin-top:10px;
-    color:#ff4d4d;
+.menu-bebas{
+    display:none;
+
+    margin-top:30px;
+
+    width:550px;
+    max-width:90%;
+
+    background:rgba(0,0,0,.75);
+
+    border-radius:20px;
+
+    padding:25px;
+}
+
+.menu-btn{
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+        90deg,
+        #ffcb05,
+        #ff9500
+    );
+
+    color:black;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.content-box{
+    display:none;
+
+    margin-top:20px;
+
+    width:550px;
+    max-width:90%;
+
+    background:rgba(0,0,0,.75);
+
+    border-radius:20px;
+
+    padding:25px;
+}
+
+.content-box h2{
+    color:#ffcb05;
+    margin-bottom:15px;
+}
 }
 
 </style>
@@ -217,6 +271,26 @@ p{
         </div>
 
     </div>
+
+</div>
+
+</div>
+
+<div id="menuBebas" class="menu-bebas">
+
+    <button class="menu-btn" onclick="showContent()">
+        BEBAS ISI APAPUN
+    </button>
+
+</div>
+
+<div id="contentBox" class="content-box">
+
+    <h2>BEBAS ISI APAPUN</h2>
+
+    <p>
+        Isi apa saja yang ingin Anda tampilkan setelah login.
+    </p>
 
 </div>
 
@@ -263,12 +337,13 @@ function login(){
 
     if(id==="admin" && pass==="12345"){
 
-        alert("Login Berhasil!");
+    closeLogin();
 
-        // Ganti URL tujuan di sini
-        window.location.href="https://google.com";
+    document.getElementById("menuBebas").style.display="block";
 
-    }else{
+    alert("Login Berhasil!");
+
+}else{
 
         document.getElementById("error").innerHTML=
         "ID atau Password Salah!";
