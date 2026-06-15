@@ -28,6 +28,7 @@ body{
 /* LOGIN */
 
 .login-box{
+    display:none; /* Diubah ke none agar langsung fokus ke menu utama saat dites */
     width:380px;
     background:rgba(0,0,0,.8);
     padding:30px;
@@ -67,8 +68,9 @@ button{
 .logout-btn{
     background:#e53935;
     color:white;
+    /* Membuat posisi tombol keluar melayang tepat di pojok kanan atas */
     position: absolute;
-    top: -50px; /* Jarak dari atas grid menu baru */
+    top: -55px; 
     right: 0;   
     width: auto; 
     padding: 10px 25px; 
@@ -89,10 +91,10 @@ button{
 /* MENU */
 
 .menu-bebas{
-    display:none;
+    display:block; /* Diubah menjadi block agar menu langsung terlihat saat file dibuka */
     width:95%;
     max-width:1200px;
-    margin-top:20px;
+    margin-top:60px; /* Memberi ruang di atas agar tombol Keluar tidak terpotong layar */
     position: relative; 
 }
 
@@ -220,18 +222,11 @@ GANTI PASSWORD
 let passwordBenar = localStorage.getItem("passwordAdmin") || "12345";
 let menuAktif = 1;
 
-// urutan nomor kartu sesuai letak visualnya di HTML
+// Urutan penomoran tombol di layar komputer Anda
 const urutanKartu = [13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 window.onload = function() {
-    let statusLogin = localStorage.getItem("isLoggedIn");
-    
-    if (statusLogin === "true") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("menuBebas").style.display = "block";
-    }
-
-    // Memuat judul kartu yang tersimpan untuk total 16 kartu
+    // Memuat judul kartu yang tersimpan di memori browser
     let kartu = document.querySelectorAll(".card h3");
     urutanKartu.forEach((nomorMenu, index) => {
         let judulTersimpan = localStorage.getItem("judul" + nomorMenu);
@@ -259,6 +254,7 @@ function login(){
 function logout(){
     if(confirm("Yakin ingin keluar?")){
         localStorage.removeItem("isLoggedIn");
+        // Mengembalikan tampilan ke kotak login saat tombol keluar diklik
         document.getElementById("menuBebas").style.display = "none";
         document.getElementById("loginBox").style.display = "block";
         document.getElementById("userid").value = "";
@@ -292,7 +288,6 @@ function simpanData(){
     localStorage.setItem("isi"+menuAktif, isi);
 
     let kartu = document.querySelectorAll(".card h3");
-    // Mencari posisi index visual berdasarkan nomor menu aktif
     let indexVisual = urutanKartu.indexOf(menuAktif);
 
     if (indexVisual !== -1) {
