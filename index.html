@@ -308,14 +308,30 @@ function login(){
 
     if(id === "admin" && pass === passwordBenar){
 
-        // Simpan status login ke localStorage agar tidak hilang saat refresh
         localStorage.setItem("isLoggedIn", "true");
 
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("menuBebas").style.display = "block";
-        document.getElementById("error").innerHTML = ""; // Hapus pesan error jika ada
+        document.body.classList.add("logged-in");
 
-    }else{
+        let loginBox = document.getElementById("loginBox");
+        let menu = document.getElementById("menuBebas");
+
+        // ANIMASI LOGIN HILANG
+        loginBox.classList.add("fade-out");
+
+        setTimeout(() => {
+            loginBox.style.display = "none";
+
+            // TAMPILKAN MENU + ANIMASI
+            menu.style.display = "block";
+            setTimeout(() => {
+                menu.classList.add("show");
+            }, 50);
+
+        }, 400);
+
+        document.getElementById("error").innerHTML = "";
+
+    } else {
 
         document.getElementById("error").innerHTML =
         "ID atau Password Salah!";
@@ -323,6 +339,7 @@ function login(){
         document.getElementById("gantiPasswordBtn").style.display =
         "block";
     }
+}
 }
 
 function logout(){
