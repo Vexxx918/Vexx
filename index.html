@@ -137,7 +137,6 @@ textarea{
 
 <body>
 
-<!-- LOGIN -->
 <div class="login-box" id="loginBox">
 
 <h2>LOGIN DI SINI</h2>
@@ -163,7 +162,6 @@ GANTI PASSWORD
 
 </div>
 
-<!-- MENU -->
 <div id="menuBebas" class="menu-bebas">
 
 <button class="logout-btn" onclick="logout()">KELUAR</button>
@@ -212,6 +210,20 @@ GANTI PASSWORD
 let passwordBenar = "12345";
 let menuAktif = 1;
 
+// --- SCRIPT BARU: MEMUAT DATA OTOMATIS SAAT REFRESH ---
+window.onload = function() {
+    let kartu = document.querySelectorAll(".card h3");
+    
+    // Looping sebanyak 12 kartu untuk mengambil data dari localStorage
+    for (let i = 1; i <= 12; i++) {
+        let judulTersimpan = localStorage.getItem("judul" + i);
+        if (judulTersimpan) {
+            kartu[i - 1].innerHTML = judulTersimpan;
+        }
+    }
+};
+// -------------------------------------------------------
+
 function login(){
 
     let id = document.getElementById("userid").value.trim();
@@ -241,7 +253,9 @@ function logout(){
 
         document.getElementById("userid").value = "";
         document.getElementById("password").value = "";
-
+        
+        // Sembunyikan content-box kembali saat logout
+        document.getElementById("contentBox").style.display = "none"; 
     }
 
 }
@@ -281,6 +295,7 @@ function simpanData(){
 
     let kartu = document.querySelectorAll(".card h3");
 
+    // Jika input kosong, kembalikan ke default nama "Judul X"
     kartu[menuAktif-1].innerHTML = judul || ("Judul "+menuAktif);
 
     alert("Data berhasil disimpan");
