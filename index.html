@@ -64,11 +64,21 @@ button{
     color:black;
 }
 
+/* --- PERUBAHAN CSS TOMBOL KELUAR --- */
+.menu-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Mengatur konten ke arah kiri */
+    margin-bottom: 15px;
+}
+
 .logout-btn{
     background:#e53935;
     color:white;
-    margin-bottom:10px;
+    width: auto; /* Agar tombol tidak melebar penuh */
+    padding: 12px 30px; /* Memberikan ruang di dalam tombol */
 }
+/* ----------------------------------- */
 
 .ganti-btn{
     display:none;
@@ -164,7 +174,9 @@ GANTI PASSWORD
 
 <div id="menuBebas" class="menu-bebas">
 
-<button class="logout-btn" onclick="logout()">KELUAR</button>
+<div class="menu-header">
+    <button class="logout-btn" onclick="logout()">KELUAR</button>
+</div>
 
 <div class="menu-grid">
 
@@ -207,14 +219,18 @@ GANTI PASSWORD
 
 <script>
 
-let passwordBenar = "12345";
+let passwordBenar = localStorage.getItem("passwordAdmin") || "12345";
 let menuAktif = 1;
 
-// --- SCRIPT BARU: MEMUAT DATA OTOMATIS SAAT REFRESH ---
 window.onload = function() {
-    let kartu = document.querySelectorAll(".card h3");
+    let statusLogin = localStorage.getItem("isLoggedIn");
     
-    // Looping sebanyak 12 kartu untuk mengambil data dari localStorage
+    if (statusLogin === "true") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBebas").style.display = "block";
+    }
+
+    let kartu = document.querySelectorAll(".card h3");
     for (let i = 1; i <= 12; i++) {
         let judulTersimpan = localStorage.getItem("judul" + i);
         if (judulTersimpan) {
@@ -222,7 +238,6 @@ window.onload = function() {
         }
     }
 };
-// -------------------------------------------------------
 
 function login(){
 
@@ -231,8 +246,11 @@ function login(){
 
     if(id === "admin" && pass === passwordBenar){
 
+        localStorage.setItem("isLoggedIn", "true");
+
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("menuBebas").style.display = "block";
+        document.getElementById("error").innerHTML = "";
 
     }else{
 
@@ -248,16 +266,16 @@ function logout(){
 
     if(confirm("Yakin ingin keluar?")){
 
+        localStorage.removeItem("isLoggedIn");
+
         document.getElementById("menuBebas").style.display = "none";
         document.getElementById("loginBox").style.display = "block";
 
         document.getElementById("userid").value = "";
         document.getElementById("password").value = "";
         
-        // Sembunyikan content-box kembali saat logout
         document.getElementById("contentBox").style.display = "none"; 
     }
-
 }
 
 function gantiPassword(){
@@ -266,6 +284,7 @@ function gantiPassword(){
 
     if(passwordBaru && passwordBaru.trim() !== ""){
         passwordBenar = passwordBaru;
+        localStorage.setItem("passwordAdmin", passwordBaru);
         alert("Password berhasil diganti");
     }
 }
@@ -295,7 +314,6 @@ function simpanData(){
 
     let kartu = document.querySelectorAll(".card h3");
 
-    // Jika input kosong, kembalikan ke default nama "Judul X"
     kartu[menuAktif-1].innerHTML = judul || ("Judul "+menuAktif);
 
     alert("Data berhasil disimpan");
