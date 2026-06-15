@@ -64,21 +64,11 @@ button{
     color:black;
 }
 
-/* --- PERUBAHAN CSS TOMBOL KELUAR --- */
-.menu-header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start; /* Mengatur konten ke arah kiri */
-    margin-bottom: 15px;
-}
-
 .logout-btn{
     background:#e53935;
     color:white;
-    width: auto; /* Agar tombol tidak melebar penuh */
-    padding: 12px 30px; /* Memberikan ruang di dalam tombol */
+    margin-bottom:10px;
 }
-/* ----------------------------------- */
 
 .ganti-btn{
     display:none;
@@ -174,9 +164,7 @@ GANTI PASSWORD
 
 <div id="menuBebas" class="menu-bebas">
 
-<div class="menu-header">
-    <button class="logout-btn" onclick="logout()">KELUAR</button>
-</div>
+<button class="logout-btn" onclick="logout()">KELUAR</button>
 
 <div class="menu-grid">
 
@@ -219,17 +207,22 @@ GANTI PASSWORD
 
 <script>
 
+// Mengambil password dari localStorage jika pernah diganti, jika belum pakai default "12345"
 let passwordBenar = localStorage.getItem("passwordAdmin") || "12345";
 let menuAktif = 1;
 
+// --- PEMERIKSAAN SAAT HALAMAN DI-REFRESH ---
 window.onload = function() {
+    // 1. Cek status login
     let statusLogin = localStorage.getItem("isLoggedIn");
     
     if (statusLogin === "true") {
+        // Jika sudah login, langsung buka menu utama
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("menuBebas").style.display = "block";
     }
 
+    // 2. Memuat judul kartu yang tersimpan
     let kartu = document.querySelectorAll(".card h3");
     for (let i = 1; i <= 12; i++) {
         let judulTersimpan = localStorage.getItem("judul" + i);
@@ -246,11 +239,12 @@ function login(){
 
     if(id === "admin" && pass === passwordBenar){
 
+        // Simpan status login ke localStorage agar tidak hilang saat refresh
         localStorage.setItem("isLoggedIn", "true");
 
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("menuBebas").style.display = "block";
-        document.getElementById("error").innerHTML = "";
+        document.getElementById("error").innerHTML = ""; // Hapus pesan error jika ada
 
     }else{
 
@@ -266,6 +260,7 @@ function logout(){
 
     if(confirm("Yakin ingin keluar?")){
 
+        // Hapus status login dari localStorage
         localStorage.removeItem("isLoggedIn");
 
         document.getElementById("menuBebas").style.display = "none";
@@ -274,6 +269,7 @@ function logout(){
         document.getElementById("userid").value = "";
         document.getElementById("password").value = "";
         
+        // Sembunyikan kembali kotak konten
         document.getElementById("contentBox").style.display = "none"; 
     }
 }
@@ -284,6 +280,7 @@ function gantiPassword(){
 
     if(passwordBaru && passwordBaru.trim() !== ""){
         passwordBenar = passwordBaru;
+        // Simpan juga password baru ke localStorage agar tidak reset ke "12345" saat di-refresh
         localStorage.setItem("passwordAdmin", passwordBaru);
         alert("Password berhasil diganti");
     }
