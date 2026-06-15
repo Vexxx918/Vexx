@@ -22,9 +22,7 @@ body{
     align-items:center;
     flex-direction:column;
     font-family:Arial,sans-serif;
-    /* Ganti 'pokemon.jpg' dengan nama file gambar latar belakang Anda yang sebenarnya */
-    background:url("image_1.png") center/cover no-repeat;
-    position: relative; /* Penting untuk pemosisian tombol */
+    background:url("pokemon.jpg") center/cover no-repeat;
 }
 
 /* LOGIN */
@@ -70,12 +68,8 @@ button{
 .menu-header {
     width: 100%;
     display: flex;
-    justify-content: flex-end; /* Mengatur konten ke arah kanan */
+    justify-content: flex-start; /* Mengatur konten ke arah kiri */
     margin-bottom: 15px;
-    position: absolute; /* Membuat tombol keluar tetap di pojok */
-    top: 20px; /* Jarak dari atas */
-    right: 20px; /* Jarak dari kanan */
-    z-index: 10; /* Pastikan tombol di atas elemen lain */
 }
 
 .logout-btn{
@@ -186,10 +180,10 @@ GANTI PASSWORD
 
 <div class="menu-grid">
 
-    <div class="card" onclick="showContent(1)"><h3>PENARIKAN TANGGAL HITUNGAN TO</h3></div>
-    <div class="card" onclick="showContent(2)"><h3>REQ GAMBAR</h3></div>
-    <div class="card" onclick="showContent(3)"><h3>REQ GAMBAR ZENJITU</h3></div>
-    <div class="card" onclick="showContent(4)"><h3>SCRIPT QRIS GARUDA</h3></div>
+    <div class="card" onclick="showContent(1)"><h3>Judul 1</h3></div>
+    <div class="card" onclick="showContent(2)"><h3>Judul 2</h3></div>
+    <div class="card" onclick="showContent(3)"><h3>Judul 3</h3></div>
+    <div class="card" onclick="showContent(4)"><h3>Judul 4</h3></div>
 
     <div class="card" onclick="showContent(5)"><h3>Judul 5</h3></div>
     <div class="card" onclick="showContent(6)"><h3>Judul 6</h3></div>
@@ -205,4 +199,127 @@ GANTI PASSWORD
 
 <div id="contentBox" class="content-box">
 
-    <h2 id="menuTitle">Menuhttp://googleusercontent.com/image_generation_content/0
+    <h2 id="menuTitle">Menu</h2>
+
+    <input type="text"
+    id="judulInput"
+    placeholder="Masukkan Judul">
+
+    <textarea id="isiInput"
+    placeholder="Masukkan Isi"></textarea>
+
+    <button class="save-btn"
+    onclick="simpanData()">
+    SIMPAN
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+let passwordBenar = localStorage.getItem("passwordAdmin") || "12345";
+let menuAktif = 1;
+
+window.onload = function() {
+    let statusLogin = localStorage.getItem("isLoggedIn");
+    
+    if (statusLogin === "true") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBebas").style.display = "block";
+    }
+
+    let kartu = document.querySelectorAll(".card h3");
+    for (let i = 1; i <= 12; i++) {
+        let judulTersimpan = localStorage.getItem("judul" + i);
+        if (judulTersimpan) {
+            kartu[i - 1].innerHTML = judulTersimpan;
+        }
+    }
+};
+
+function login(){
+
+    let id = document.getElementById("userid").value.trim();
+    let pass = document.getElementById("password").value.trim();
+
+    if(id === "admin" && pass === passwordBenar){
+
+        localStorage.setItem("isLoggedIn", "true");
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBebas").style.display = "block";
+        document.getElementById("error").innerHTML = "";
+
+    }else{
+
+        document.getElementById("error").innerHTML =
+        "ID atau Password Salah!";
+
+        document.getElementById("gantiPasswordBtn").style.display =
+        "block";
+    }
+}
+
+function logout(){
+
+    if(confirm("Yakin ingin keluar?")){
+
+        localStorage.removeItem("isLoggedIn");
+
+        document.getElementById("menuBebas").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
+
+        document.getElementById("userid").value = "";
+        document.getElementById("password").value = "";
+        
+        document.getElementById("contentBox").style.display = "none"; 
+    }
+}
+
+function gantiPassword(){
+
+    let passwordBaru = prompt("Masukkan Password Baru");
+
+    if(passwordBaru && passwordBaru.trim() !== ""){
+        passwordBenar = passwordBaru;
+        localStorage.setItem("passwordAdmin", passwordBaru);
+        alert("Password berhasil diganti");
+    }
+}
+
+function showContent(menu){
+
+    menuAktif = menu;
+
+    document.getElementById("contentBox").style.display = "block";
+
+    document.getElementById("menuTitle").innerHTML = "Menu " + menu;
+
+    document.getElementById("judulInput").value =
+    localStorage.getItem("judul"+menu) || "";
+
+    document.getElementById("isiInput").value =
+    localStorage.getItem("isi"+menu) || "";
+}
+
+function simpanData(){
+
+    let judul = document.getElementById("judulInput").value;
+    let isi = document.getElementById("isiInput").value;
+
+    localStorage.setItem("judul"+menuAktif, judul);
+    localStorage.setItem("isi"+menuAktif, isi);
+
+    let kartu = document.querySelectorAll(".card h3");
+
+    kartu[menuAktif-1].innerHTML = judul || ("Judul "+menuAktif);
+
+    alert("Data berhasil disimpan");
+}
+
+</script>
+
+</body>
+</html>
