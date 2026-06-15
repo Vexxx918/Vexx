@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +8,7 @@
 <title>Login Pokemon</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -28,7 +30,7 @@ body{
 
 .login-box{
     width:380px;
-    background:rgba(0,0,0,0.8);
+    background:rgba(0,0,0,.8);
     padding:30px;
     border-radius:20px;
     text-align:center;
@@ -36,8 +38,8 @@ body{
 }
 
 .login-box h2{
-    margin-bottom:20px;
     color:#ffcb05;
+    margin-bottom:20px;
 }
 
 input{
@@ -64,19 +66,14 @@ button{
 }
 
 .ganti-btn{
+    display:none;
     margin-top:10px;
     background:#2196F3;
     color:white;
-    display:none;
 }
 
 #error{
     color:red;
-    margin-top:10px;
-}
-
-#sukses{
-    color:#4CAF50;
     margin-top:10px;
 }
 
@@ -86,7 +83,7 @@ button{
     display:none;
     width:95%;
     max-width:1200px;
-    margin-top:30px;
+    margin-top:20px;
 }
 
 .menu-grid{
@@ -101,11 +98,6 @@ button{
     border-radius:15px;
     text-align:center;
     cursor:pointer;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
 }
 
 .card h3{
@@ -116,118 +108,93 @@ button{
     display:none;
     margin-top:20px;
     background:white;
-    color:black;
-    padding:25px;
+    padding:20px;
     border-radius:15px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="login-box" id="loginBox">
-
-    <h2>LOGIN DI SINI</h2>
-
-    <input
-    type="text"
-    id="userid"
-    placeholder="Masukkan ID">
-
-    <input
-    type="password"
-    id="password"
-    placeholder="Masukkan Password">
-
-    <button
-    class="login-btn"
-    onclick="login()">
-    LOGIN
-    </button>
-
-    <button
-    id="gantiPasswordBtn"
-    class="ganti-btn"
-    onclick="gantiPassword()">
-    GANTI PASSWORD
-    </button>
-
-    <p id="error"></p>
-    <p id="sukses"></p>
-
-</div>
-
-<!-- MENU SETELAH LOGIN -->
-
-<div id="menuBebas" class="menu-bebas">
-
-    <div class="menu-grid">
-
-        <div class="card" onclick="showContent(1)">
-            <h3>Judul 1</h3>
-        </div>
-
-        <div class="card" onclick="showContent(2)">
-            <h3>Judul 2</h3>
-        </div>
-
-        <div class="card" onclick="showContent(3)">
-            <h3>Judul 3</h3>
-        </div>
-
-        <div class="card" onclick="showContent(4)">
-            <h3>Judul 4</h3>
-        </div>
-
-        <div class="card" onclick="showContent(5)">
-            <h3>Judul 5</h3>
-        </div>
-
-        <div class="card" onclick="showContent(6)">
-            <h3>Judul 6</h3>
-        </div>
-
-        <div class="card" onclick="showContent(7)">
-            <h3>Judul 7</h3>
-        </div>
-
-        <div class="card" onclick="showContent(8)">
-            <h3>Judul 8</h3>
-        </div>
-
-        <div class="card" onclick="showContent(9)">
-            <h3>Judul 9</h3>
-        </div>
-
-        <div class="card" onclick="showContent(10)">
-            <h3>Judul 10</h3>
-        </div>
-
-        <div class="card" onclick="showContent(11)">
-            <h3>Judul 11</h3>
-        </div>
-
-        <div class="card" onclick="showContent(12)">
-            <h3>Judul 12</h3>
-        </div>
-
-    </div>
-
-   <div id="contentBox" class="content-box">
-       textarea{
-    border:none;
-    outline:none;
-    font-family:Arial,sans-serif;
-}
-
-.content-box input{
-    width:100%;
-    border:1px solid #ddd;
 }
 
 .content-box h2{
     margin-bottom:15px;
 }
+
+textarea{
+    width:100%;
+    height:180px;
+    padding:15px;
+    border-radius:10px;
+    resize:none;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.save-btn{
+    background:#4CAF50;
+    color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login-box" id="loginBox">
+
+```
+<h2>LOGIN DI SINI</h2>
+
+<input type="text"
+id="userid"
+placeholder="Masukkan ID">
+
+<input type="password"
+id="password"
+placeholder="Masukkan Password">
+
+<button
+class="login-btn"
+onclick="login()">
+LOGIN
+</button>
+
+<button
+id="gantiPasswordBtn"
+class="ganti-btn"
+onclick="gantiPassword()">
+GANTI PASSWORD
+</button>
+
+<p id="error"></p>
+```
+
+</div>
+
+<!-- MENU -->
+
+<div id="menuBebas" class="menu-bebas">
+
+```
+<div class="menu-grid">
+
+    <div class="card" onclick="showContent(1)"><h3>Judul 1</h3></div>
+    <div class="card" onclick="showContent(2)"><h3>Judul 2</h3></div>
+    <div class="card" onclick="showContent(3)"><h3>Judul 3</h3></div>
+    <div class="card" onclick="showContent(4)"><h3>Judul 4</h3></div>
+
+    <div class="card" onclick="showContent(5)"><h3>Judul 5</h3></div>
+    <div class="card" onclick="showContent(6)"><h3>Judul 6</h3></div>
+    <div class="card" onclick="showContent(7)"><h3>Judul 7</h3></div>
+    <div class="card" onclick="showContent(8)"><h3>Judul 8</h3></div>
+
+    <div class="card" onclick="showContent(9)"><h3>Judul 9</h3></div>
+    <div class="card" onclick="showContent(10)"><h3>Judul 10</h3></div>
+    <div class="card" onclick="showContent(11)"><h3>Judul 11</h3></div>
+    <div class="card" onclick="showContent(12)"><h3>Judul 12</h3></div>
+
+</div>
+
+<div id="contentBox" class="content-box">
 
     <h2 id="menuTitle">Menu</h2>
 
@@ -238,154 +205,137 @@ button{
 
     <textarea
     id="isiInput"
-    placeholder="Masukkan Isi Menu"
-    style="
-    width:100%;
-    height:180px;
-    margin-top:10px;
-    padding:15px;
-    border-radius:10px;
-    resize:none;">
-    </textarea>
+    placeholder="Masukkan Isi Menu"></textarea>
 
     <button
-    onclick="simpanData()"
-    style="
-    margin-top:10px;
-    background:#4CAF50;
-    color:white;">
+    class="save-btn"
+    onclick="simpanData()">
     SIMPAN
     </button>
 
 </div>
+```
 
 </div>
 
 <script>
 
 let passwordBenar = "12345";
+let menuAktif = 1;
 
 function login(){
 
-    let id = document.getElementById("userid").value;
-    let pass = document.getElementById("password").value;
+    let id =
+    document.getElementById("userid").value;
 
-    if(id === "admin" && pass === passwordBenar){
+    let pass =
+    document.getElementById("password").value;
 
-        document.getElementById("loginBox").style.display = "none";
+    if(id === "admin" &&
+       pass === passwordBenar){
 
-        document.getElementById("menuBebas").style.display = "block";
+        document.getElementById("loginBox")
+        .style.display = "none";
+
+        document.getElementById("menuBebas")
+        .style.display = "block";
 
     }else{
 
-        document.getElementById("error").innerHTML =
+        document.getElementById("error")
+        .innerHTML =
         "ID atau Password Salah!";
 
-        document.getElementById("gantiPasswordBtn").style.display =
-        "block";
+        document.getElementById("gantiPasswordBtn")
+        .style.display = "block";
     }
 }
 
 function gantiPassword(){
 
     let passwordBaru =
-    prompt("Masukkan Password Baru:");
+    prompt("Masukkan Password Baru");
 
-    if(passwordBaru && passwordBaru.trim() !== ""){
+    if(passwordBaru &&
+       passwordBaru.trim() !== ""){
 
-        passwordBenar = passwordBaru;
+        passwordBenar =
+        passwordBaru;
 
-        alert("Password berhasil diganti!");
+        document.getElementById("error")
+        .innerHTML = "";
 
-        document.getElementById("gantiPasswordBtn").style.display =
-        "none";
+        document.getElementById("gantiPasswordBtn")
+        .style.display = "none";
 
-        document.getElementById("error").innerHTML = "";
+        alert("Password berhasil diganti");
     }
 }
-
-let menuAktif = 1;
 
 function showContent(menu){
 
     menuAktif = menu;
 
-    document.getElementById("contentBox").style.display = "block";
+    document.getElementById("contentBox")
+    .style.display = "block";
 
-    document.getElementById("menuTitle").innerHTML =
+    document.getElementById("menuTitle")
+    .innerHTML =
     "Menu " + menu;
 
-    document.getElementById("judulInput").value =
+    document.getElementById("judulInput")
+    .value =
     localStorage.getItem("judul"+menu) || "";
 
-    document.getElementById("isiInput").value =
+    document.getElementById("isiInput")
+    .value =
     localStorage.getItem("isi"+menu) || "";
 }
 
 function simpanData(){
 
-    localStorage.setItem(
-        "judul"+menuAktif,
-        document.getElementById("judulInput").value
-    );
+    let judul =
+    document.getElementById("judulInput").value;
+
+    let isi =
+    document.getElementById("isiInput").value;
 
     localStorage.setItem(
-        "isi"+menuAktif,
-        document.getElementById("isiInput").value
-    );
+    "judul"+menuAktif,
+    judul);
 
-    const kartu =
+    localStorage.setItem(
+    "isi"+menuAktif,
+    isi);
+
+    let kartu =
     document.querySelectorAll(".card h3");
 
     kartu[menuAktif-1].innerHTML =
-    document.getElementById("judulInput").value || ("Judul "+menuAktif);
+    judul || ("Judul "+menuAktif);
 
     alert("Data berhasil disimpan");
 }
 
-        1:"Isi Menu 1",
-        2:"Isi Menu 2",
-        3:"Isi Menu 3",
-        4:"Isi Menu 4",
-
-        5:"Isi Menu 5",
-        6:"Isi Menu 6",
-        7:"Isi Menu 7",
-        8:"Isi Menu 8",
-
-        9:"Isi Menu 9",
-        10:"Isi Menu 10",
-        11:"Isi Menu 11",
-        12:"Isi Menu 12"
-
-    };
-
-    document.getElementById("contentBox").innerHTML = `
-        <h2>Judul ${menu}</h2>
-        <p>${data[menu]}</p>
-    `;
-
-    document.getElementById("contentBox").style.display = "block";
-}
 window.onload = function(){
 
-    const kartu =
+    let kartu =
     document.querySelectorAll(".card h3");
 
     for(let i=1;i<=12;i++){
 
-        const judul =
+        let judul =
         localStorage.getItem("judul"+i);
 
         if(judul){
 
-            kartu[i-1].innerHTML = judul;
-
+            kartu[i-1].innerHTML =
+            judul;
         }
     }
 }
-</script>
 
+</script>
 
 </body>
 </html>
