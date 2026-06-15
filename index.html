@@ -15,14 +15,16 @@
 
 body{
     width:100%;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
     font-family:Arial,sans-serif;
-
     background:url("pokemon.jpg") center/cover no-repeat;
 }
+
+/* LOGIN */
 
 .login-box{
     width:380px;
@@ -69,20 +71,61 @@ button{
 }
 
 #error{
-    margin-top:10px;
     color:red;
+    margin-top:10px;
 }
 
 #sukses{
     color:#4CAF50;
     margin-top:10px;
 }
+
+/* MENU */
+
+.menu-bebas{
+    display:none;
+    width:95%;
+    max-width:1200px;
+    margin-top:30px;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    color:#ff9500;
+}
+
+.content-box{
+    display:none;
+    margin-top:20px;
+    background:white;
+    color:black;
+    padding:25px;
+    border-radius:15px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="login-box" id="loginBox">
 
     <h2>LOGIN DI SINI</h2>
 
@@ -114,6 +157,66 @@ button{
 
 </div>
 
+<!-- MENU SETELAH LOGIN -->
+
+<div id="menuBebas" class="menu-bebas">
+
+    <div class="menu-grid">
+
+        <div class="card" onclick="showContent(1)">
+            <h3>Judul 1</h3>
+        </div>
+
+        <div class="card" onclick="showContent(2)">
+            <h3>Judul 2</h3>
+        </div>
+
+        <div class="card" onclick="showContent(3)">
+            <h3>Judul 3</h3>
+        </div>
+
+        <div class="card" onclick="showContent(4)">
+            <h3>Judul 4</h3>
+        </div>
+
+        <div class="card" onclick="showContent(5)">
+            <h3>Judul 5</h3>
+        </div>
+
+        <div class="card" onclick="showContent(6)">
+            <h3>Judul 6</h3>
+        </div>
+
+        <div class="card" onclick="showContent(7)">
+            <h3>Judul 7</h3>
+        </div>
+
+        <div class="card" onclick="showContent(8)">
+            <h3>Judul 8</h3>
+        </div>
+
+        <div class="card" onclick="showContent(9)">
+            <h3>Judul 9</h3>
+        </div>
+
+        <div class="card" onclick="showContent(10)">
+            <h3>Judul 10</h3>
+        </div>
+
+        <div class="card" onclick="showContent(11)">
+            <h3>Judul 11</h3>
+        </div>
+
+        <div class="card" onclick="showContent(12)">
+            <h3>Judul 12</h3>
+        </div>
+
+    </div>
+
+    <div id="contentBox" class="content-box"></div>
+
+</div>
+
 <script>
 
 let passwordBenar = "12345";
@@ -125,9 +228,9 @@ function login(){
 
     if(id === "admin" && pass === passwordBenar){
 
-        document.getElementById("error").innerHTML = "";
-        document.getElementById("sukses").innerHTML =
-        "Login Berhasil!";
+        document.getElementById("loginBox").style.display = "none";
+
+        document.getElementById("menuBebas").style.display = "block";
 
     }else{
 
@@ -155,6 +258,35 @@ function gantiPassword(){
 
         document.getElementById("error").innerHTML = "";
     }
+}
+
+function showContent(menu){
+
+    const data = {
+
+        1:"Isi Menu 1",
+        2:"Isi Menu 2",
+        3:"Isi Menu 3",
+        4:"Isi Menu 4",
+
+        5:"Isi Menu 5",
+        6:"Isi Menu 6",
+        7:"Isi Menu 7",
+        8:"Isi Menu 8",
+
+        9:"Isi Menu 9",
+        10:"Isi Menu 10",
+        11:"Isi Menu 11",
+        12:"Isi Menu 12"
+
+    };
+
+    document.getElementById("contentBox").innerHTML = `
+        <h2>Judul ${menu}</h2>
+        <p>${data[menu]}</p>
+    `;
+
+    document.getElementById("contentBox").style.display = "block";
 }
 
 </script>
