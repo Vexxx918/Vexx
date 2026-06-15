@@ -214,6 +214,20 @@ button{
     </div>
 
    <div id="contentBox" class="content-box">
+       textarea{
+    border:none;
+    outline:none;
+    font-family:Arial,sans-serif;
+}
+
+.content-box input{
+    width:100%;
+    border:1px solid #ddd;
+}
+
+.content-box h2{
+    margin-bottom:15px;
+}
 
     <h2 id="menuTitle">Menu</h2>
 
@@ -290,9 +304,44 @@ function gantiPassword(){
     }
 }
 
+let menuAktif = 1;
+
 function showContent(menu){
 
-    const data = {
+    menuAktif = menu;
+
+    document.getElementById("contentBox").style.display = "block";
+
+    document.getElementById("menuTitle").innerHTML =
+    "Menu " + menu;
+
+    document.getElementById("judulInput").value =
+    localStorage.getItem("judul"+menu) || "";
+
+    document.getElementById("isiInput").value =
+    localStorage.getItem("isi"+menu) || "";
+}
+
+function simpanData(){
+
+    localStorage.setItem(
+        "judul"+menuAktif,
+        document.getElementById("judulInput").value
+    );
+
+    localStorage.setItem(
+        "isi"+menuAktif,
+        document.getElementById("isiInput").value
+    );
+
+    const kartu =
+    document.querySelectorAll(".card h3");
+
+    kartu[menuAktif-1].innerHTML =
+    document.getElementById("judulInput").value || ("Judul "+menuAktif);
+
+    alert("Data berhasil disimpan");
+}
 
         1:"Isi Menu 1",
         2:"Isi Menu 2",
@@ -318,8 +367,25 @@ function showContent(menu){
 
     document.getElementById("contentBox").style.display = "block";
 }
+window.onload = function(){
 
+    const kartu =
+    document.querySelectorAll(".card h3");
+
+    for(let i=1;i<=12;i++){
+
+        const judul =
+        localStorage.getItem("judul"+i);
+
+        if(judul){
+
+            kartu[i-1].innerHTML = judul;
+
+        }
+    }
+}
 </script>
+
 
 </body>
 </html>
