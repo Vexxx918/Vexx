@@ -7,64 +7,6 @@
 <title>Login Pokemon</title>
 
 <style>
-    /* ANIMASI GLOBAL */
-body {
-    transition: background 0.8s ease;
-}
-
-/* LOGIN ANIMATION */
-.login-box {
-    width:380px;
-    background:rgba(0,0,0,.8);
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-    color:white;
-
-    /* ANIMASI BARU */
-    animation: popIn 0.6s ease;
-    transform-origin: center;
-}
-
-@keyframes popIn {
-    0% {
-        transform: scale(0.7);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* HIDE SMOOTH */
-.fade-out {
-    animation: fadeOut 0.4s forwards;
-}
-
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-}
-
-/* MENU FADE IN */
-.menu-bebas {
-    display:none;
-    width:95%;
-    max-width:1200px;
-    margin-top:20px;
-    position: relative;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.6s ease;
-}
-
-.menu-bebas.show {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 *{
     margin:0;
@@ -81,11 +23,6 @@ body{
     flex-direction:column;
     font-family:Arial,sans-serif;
     background:url("pokemon.jpg") center/cover no-repeat;
-    transition:0.5s;
-}
-
-body.logged-in{
-    background:url("Casddff.jpg") center/cover no-repeat;
 }
 
 /* LOGIN */
@@ -308,30 +245,14 @@ function login(){
 
     if(id === "admin" && pass === passwordBenar){
 
+        // Simpan status login ke localStorage agar tidak hilang saat refresh
         localStorage.setItem("isLoggedIn", "true");
 
-        document.body.classList.add("logged-in");
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBebas").style.display = "block";
+        document.getElementById("error").innerHTML = ""; // Hapus pesan error jika ada
 
-        let loginBox = document.getElementById("loginBox");
-        let menu = document.getElementById("menuBebas");
-
-        // ANIMASI LOGIN HILANG
-        loginBox.classList.add("fade-out");
-
-        setTimeout(() => {
-            loginBox.style.display = "none";
-
-            // TAMPILKAN MENU + ANIMASI
-            menu.style.display = "block";
-            setTimeout(() => {
-                menu.classList.add("show");
-            }, 50);
-
-        }, 400);
-
-        document.getElementById("error").innerHTML = "";
-
-    } else {
+    }else{
 
         document.getElementById("error").innerHTML =
         "ID atau Password Salah!";
@@ -339,7 +260,6 @@ function login(){
         document.getElementById("gantiPasswordBtn").style.display =
         "block";
     }
-}
 }
 
 function logout(){
