@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vexx Website</title>
+<title>Login Pokemon</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -16,128 +15,30 @@
 
 body{
     width:100%;
-    min-height:100vh;
+    height:100vh;
     display:flex;
-    flex-direction:column;
-    align-items:center;
-    font-family:Arial,sans-serif;
-    color:white;
-    text-align:center;
-
-    background-image:url("pokemon.jpg");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-
-    transition:0.5s;
-}
-
-/* HALAMAN AWAL */
-
-h1{
-    margin-top:20px;
-    font-size:55px;
-    text-shadow:0 0 10px rgba(0,0,0,.8);
-}
-
-#teksUtama{
-    margin-top:20px;
-    font-size:28px;
-}
-
-.login-btn{
-    margin-top:40px;
-    padding:15px 55px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(90deg,#ffcb05,#ff9500);
-    color:black;
-    font-size:22px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* STATISTIK */
-
-.stats-box{
-    margin-top:40px;
-    width:550px;
-    max-width:90%;
-    background:rgba(0,0,0,.65);
-    backdrop-filter:blur(8px);
-    border-radius:20px;
-    padding:25px;
-}
-
-.stats-box h2{
-    color:#ffcb05;
-    margin-bottom:20px;
-}
-
-.chart{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.bar{
-    height:45px;
-    border-radius:30px;
-    display:flex;
-    align-items:center;
-    padding-left:15px;
-    font-weight:bold;
-}
-
-.hp{
-    width:90%;
-    background:#4CAF50;
-}
-
-.attack{
-    width:75%;
-    background:#ff5722;
-}
-
-.defense{
-    width:65%;
-    background:#2196F3;
-}
-
-.speed{
-    width:85%;
-    background:#ffcb05;
-    color:black;
-}
-
-/* LOGIN */
-
-.modal{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.7);
     justify-content:center;
     align-items:center;
+    font-family:Arial,sans-serif;
+
+    background:url("pokemon.jpg") center/cover no-repeat;
 }
 
 .login-box{
     width:380px;
-    background:#1f1f1f;
+    background:rgba(0,0,0,0.8);
     padding:30px;
     border-radius:20px;
+    text-align:center;
+    color:white;
 }
 
 .login-box h2{
-    color:#ffcb05;
     margin-bottom:20px;
+    color:#ffcb05;
 }
 
-.login-box input{
+input{
     width:100%;
     padding:15px;
     margin-bottom:15px;
@@ -145,22 +46,26 @@ h1{
     border-radius:10px;
 }
 
-.submit-btn{
+button{
     width:100%;
     padding:15px;
     border:none;
     border-radius:50px;
-    background:linear-gradient(90deg,#ffcb05,#ff9500);
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
 }
 
-.close-btn{
+.login-btn{
+    background:linear-gradient(90deg,#ffcb05,#ff9500);
+    color:black;
+}
+
+.ganti-btn{
     margin-top:10px;
-    background:none;
-    border:none;
+    background:#2196F3;
     color:white;
-    cursor:pointer;
+    display:none;
 }
 
 #error{
@@ -168,239 +73,90 @@ h1{
     color:red;
 }
 
-/* MENU SETELAH LOGIN */
-
-.menu-bebas{
-    display:none;
-    width:90%;
-    margin-top:50px;
+#sukses{
+    color:#4CAF50;
+    margin-top:10px;
 }
-
-.menu-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.menu-btn{
-    width:100%;
-    padding:20px;
-    border:none;
-    border-radius:15px;
-    background:linear-gradient(90deg,#ffcb05,#ff9500);
-    color:black;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.content-box{
-    display:none;
-    margin-top:30px;
-    width:100%;
-    background:white;
-    color:black;
-    padding:25px;
-    border-radius:20px;
-}
-
-.menu-btn{
-    width:100%;
-    padding:20px;
-    border:none;
-    border-radius:15px;
-    background:linear-gradient(90deg,#ffcb05,#ff9500);
-    color:black;
-    font-size:24px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.content-box{
-    display:none;
-    margin-top:20px;
-    width:600px;
-    max-width:90%;
-    background:white;
-    color:black;
-    padding:30px;
-    border-radius:20px;
-}
-
-.content-box h2{
-    margin-bottom:15px;
-}
-
 </style>
 </head>
 
 <body>
 
-<h1 id="judulUtama" style="color: #87CEFA;">
-SELAMAT DATANG DI DUNIA POKEMON
-</h1>
-
-<p id="teksUtama">
-沒錢沒用
-</p>
-
-<button
-id="btnLogin"
-class="login-btn"
-onclick="openLogin()">
-LOGIN
-</button>
-
-<div id="statsBox" class="stats-box">
-
-<h2>STATISTIK POKEMON</h2>
-
-<div class="chart">
-
-<div class="bar hp">HP 90%</div>
-
-<div class="bar attack">ATTACK 75%</div>
-
-<div class="bar defense">DEFENSE 65%</div>
-
-<div class="bar speed">SPEED 85%</div>
-
-</div>
-
-<!-- MENU LOGIN BERHASIL -->
-
-<div id="menuBebas" class="menu-bebas">
-
-    <div class="menu-grid">
-
-        <button class="menu-btn" onclick="showContent(1)">MENU 1</button>
-        <button class="menu-btn" onclick="showContent(2)">MENU 2</button>
-        <button class="menu-btn" onclick="showContent(3)">MENU 3</button>
-        <button class="menu-btn" onclick="showContent(4)">MENU 4</button>
-
-        <button class="menu-btn" onclick="showContent(5)">MENU 5</button>
-        <button class="menu-btn" onclick="showContent(6)">MENU 6</button>
-        <button class="menu-btn" onclick="showContent(7)">MENU 7</button>
-        <button class="menu-btn" onclick="showContent(8)">MENU 8</button>
-
-        <button class="menu-btn" onclick="showContent(9)">MENU 9</button>
-        <button class="menu-btn" onclick="showContent(10)">MENU 10</button>
-        <button class="menu-btn" onclick="showContent(11)">MENU 11</button>
-        <button class="menu-btn" onclick="showContent(12)">MENU 12</button>
-
-    </div>
-
-    <div id="contentBox" class="content-box"></div>
-
-</div>
-    
-</div>
-
-<!-- POPUP LOGIN -->
-
-<div class="modal" id="loginModal">
-
 <div class="login-box">
 
-<h2>LOGIN POKEMON</h2>
+    <h2>LOGIN DI SINI</h2>
 
-<input
-type="text"
-id="userid"
-placeholder="Masukkan ID">
+    <input
+    type="text"
+    id="userid"
+    placeholder="Masukkan ID">
 
-<input
-type="password"
-id="password"
-placeholder="Masukkan Password">
+    <input
+    type="password"
+    id="password"
+    placeholder="Masukkan Password">
 
-<button
-class="submit-btn"
-onclick="login()">
+    <button
+    class="login-btn"
+    onclick="login()">
+    LOGIN
+    </button>
 
-MASUK
+    <button
+    id="gantiPasswordBtn"
+    class="ganti-btn"
+    onclick="gantiPassword()">
+    GANTI PASSWORD
+    </button>
 
-</button>
-
-<button
-class="close-btn"
-onclick="closeLogin()">
-
-Tutup
-
-</button>
-
-<p id="error"></p>
-
-</div>
+    <p id="error"></p>
+    <p id="sukses"></p>
 
 </div>
 
 <script>
 
-function openLogin(){
-    document.getElementById("loginModal").style.display="flex";
-}
-
-function closeLogin(){
-    document.getElementById("loginModal").style.display="none";
-}
+let passwordBenar = "12345";
 
 function login(){
 
-    let id=document.getElementById("userid").value;
-    let pass=document.getElementById("password").value;
+    let id = document.getElementById("userid").value;
+    let pass = document.getElementById("password").value;
 
-    if(id==="admin" && pass==="12345"){
+    if(id === "admin" && pass === passwordBenar){
 
-        closeLogin();
-
-        document.getElementById("judulUtama").style.display="none";
-        document.getElementById("teksUtama").style.display="none";
-        document.getElementById("btnLogin").style.display="none";
-        document.getElementById("statsBox").style.display="none";
-
-        document.body.style.backgroundImage="none";
-        document.body.style.backgroundColor="#87CEEB";
-
-        document.getElementById("menuBebas").style.display="block";
+        document.getElementById("error").innerHTML = "";
+        document.getElementById("sukses").innerHTML =
+        "Login Berhasil!";
 
     }else{
 
-        document.getElementById("error").innerHTML=
+        document.getElementById("error").innerHTML =
         "ID atau Password Salah!";
 
+        document.getElementById("gantiPasswordBtn").style.display =
+        "block";
     }
 }
 
-function showContent(menu){
+function gantiPassword(){
 
-    const data = {
+    let passwordBaru =
+    prompt("Masukkan Password Baru:");
 
-        1:"Isi untuk Menu 1",
-        2:"Isi untuk Menu 2",
-        3:"Isi untuk Menu 3",
-        4:"Isi untuk Menu 4",
+    if(passwordBaru && passwordBaru.trim() !== ""){
 
-        5:"Isi untuk Menu 5",
-        6:"Isi untuk Menu 6",
-        7:"Isi untuk Menu 7",
-        8:"Isi untuk Menu 8",
+        passwordBenar = passwordBaru;
 
-        9:"Isi untuk Menu 9",
-        10:"Isi untuk Menu 10",
-        11:"Isi untuk Menu 11",
-        12:"Isi untuk Menu 12"
+        alert("Password berhasil diganti!");
 
-    };
+        document.getElementById("gantiPasswordBtn").style.display =
+        "none";
 
-    document.getElementById("contentBox").innerHTML = `
-        <h2>MENU ${menu}</h2>
-        <p>${data[menu]}</p>
-    `;
-
-    document.getElementById("contentBox").style.display = "block";
+        document.getElementById("error").innerHTML = "";
+    }
 }
+
 </script>
 
 </body>
