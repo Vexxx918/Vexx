@@ -67,7 +67,12 @@ button{
 .logout-btn{
     background:#e53935;
     color:white;
-    margin-bottom:10px;
+    /* Mengubah tombol keluar menjadi melayang di pojok kanan atas */
+    position: absolute;
+    top: -50px; /* Jarak dari atas grid menu */
+    right: 0;   /* Menempel di kanan */
+    width: auto; /* Lebar otomatis mengikuti teks */
+    padding: 10px 25px; /* Mengatur ruang di dalam tombol agar proporsional */
 }
 
 .ganti-btn{
@@ -89,6 +94,7 @@ button{
     width:95%;
     max-width:1200px;
     margin-top:20px;
+    position: relative; /* Ditambahkan agar tombol logout-btn yang berposisi absolute bisa patokan ke box ini */
 }
 
 .menu-grid{
