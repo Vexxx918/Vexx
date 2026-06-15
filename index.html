@@ -67,12 +67,11 @@ button{
 .logout-btn{
     background:#e53935;
     color:white;
-    /* Mengubah tombol keluar menjadi melayang di pojok kanan atas */
     position: absolute;
-    top: -50px; /* Jarak dari atas grid menu */
-    right: 0;   /* Menempel di kanan */
-    width: auto; /* Lebar otomatis mengikuti teks */
-    padding: 10px 25px; /* Mengatur ruang di dalam tombol agar proporsional */
+    top: -50px; /* Jarak dari atas grid menu baru */
+    right: 0;   
+    width: auto; 
+    padding: 10px 25px; 
 }
 
 .ganti-btn{
@@ -94,7 +93,7 @@ button{
     width:95%;
     max-width:1200px;
     margin-top:20px;
-    position: relative; /* Ditambahkan agar tombol logout-btn yang berposisi absolute bisa patokan ke box ini */
+    position: relative; 
 }
 
 .menu-grid{
@@ -174,6 +173,11 @@ GANTI PASSWORD
 
 <div class="menu-grid">
 
+    <div class="card" onclick="showContent(13)"><h3>Judul 13</h3></div>
+    <div class="card" onclick="showContent(14)"><h3>Judul 14</h3></div>
+    <div class="card" onclick="showContent(15)"><h3>Judul 15</h3></div>
+    <div class="card" onclick="showContent(16)"><h3>Judul 16</h3></div>
+
     <div class="card" onclick="showContent(1)"><h3>Judul 1</h3></div>
     <div class="card" onclick="showContent(2)"><h3>Judul 2</h3></div>
     <div class="card" onclick="showContent(3)"><h3>Judul 3</h3></div>
@@ -213,102 +217,74 @@ GANTI PASSWORD
 
 <script>
 
-// Mengambil password dari localStorage jika pernah diganti, jika belum pakai default "12345"
 let passwordBenar = localStorage.getItem("passwordAdmin") || "12345";
 let menuAktif = 1;
 
-// --- PEMERIKSAAN SAAT HALAMAN DI-REFRESH ---
+// urutan nomor kartu sesuai letak visualnya di HTML
+const urutanKartu = [13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 window.onload = function() {
-    // 1. Cek status login
     let statusLogin = localStorage.getItem("isLoggedIn");
     
     if (statusLogin === "true") {
-        // Jika sudah login, langsung buka menu utama
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("menuBebas").style.display = "block";
     }
 
-    // 2. Memuat judul kartu yang tersimpan
+    // Memuat judul kartu yang tersimpan untuk total 16 kartu
     let kartu = document.querySelectorAll(".card h3");
-    for (let i = 1; i <= 12; i++) {
-        let judulTersimpan = localStorage.getItem("judul" + i);
+    urutanKartu.forEach((nomorMenu, index) => {
+        let judulTersimpan = localStorage.getItem("judul" + nomorMenu);
         if (judulTersimpan) {
-            kartu[i - 1].innerHTML = judulTersimpan;
+            kartu[index].innerHTML = judulTersimpan;
         }
-    }
+    });
 };
 
 function login(){
-
     let id = document.getElementById("userid").value.trim();
     let pass = document.getElementById("password").value.trim();
 
     if(id === "admin" && pass === passwordBenar){
-
-        // Simpan status login ke localStorage agar tidak hilang saat refresh
         localStorage.setItem("isLoggedIn", "true");
-
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("menuBebas").style.display = "block";
-        document.getElementById("error").innerHTML = ""; // Hapus pesan error jika ada
-
+        document.getElementById("error").innerHTML = ""; 
     }else{
-
-        document.getElementById("error").innerHTML =
-        "ID atau Password Salah!";
-
-        document.getElementById("gantiPasswordBtn").style.display =
-        "block";
+        document.getElementById("error").innerHTML = "ID atau Password Salah!";
+        document.getElementById("gantiPasswordBtn").style.display = "block";
     }
 }
 
 function logout(){
-
     if(confirm("Yakin ingin keluar?")){
-
-        // Hapus status login dari localStorage
         localStorage.removeItem("isLoggedIn");
-
         document.getElementById("menuBebas").style.display = "none";
         document.getElementById("loginBox").style.display = "block";
-
         document.getElementById("userid").value = "";
         document.getElementById("password").value = "";
-        
-        // Sembunyikan kembali kotak konten
         document.getElementById("contentBox").style.display = "none"; 
     }
 }
 
 function gantiPassword(){
-
     let passwordBaru = prompt("Masukkan Password Baru");
-
     if(passwordBaru && passwordBaru.trim() !== ""){
         passwordBenar = passwordBaru;
-        // Simpan juga password baru ke localStorage agar tidak reset ke "12345" saat di-refresh
         localStorage.setItem("passwordAdmin", passwordBaru);
         alert("Password berhasil diganti");
     }
 }
 
 function showContent(menu){
-
     menuAktif = menu;
-
     document.getElementById("contentBox").style.display = "block";
-
     document.getElementById("menuTitle").innerHTML = "Menu " + menu;
-
-    document.getElementById("judulInput").value =
-    localStorage.getItem("judul"+menu) || "";
-
-    document.getElementById("isiInput").value =
-    localStorage.getItem("isi"+menu) || "";
+    document.getElementById("judulInput").value = localStorage.getItem("judul"+menu) || "";
+    document.getElementById("isiInput").value = localStorage.getItem("isi"+menu) || "";
 }
 
 function simpanData(){
-
     let judul = document.getElementById("judulInput").value;
     let isi = document.getElementById("isiInput").value;
 
@@ -316,8 +292,12 @@ function simpanData(){
     localStorage.setItem("isi"+menuAktif, isi);
 
     let kartu = document.querySelectorAll(".card h3");
+    // Mencari posisi index visual berdasarkan nomor menu aktif
+    let indexVisual = urutanKartu.indexOf(menuAktif);
 
-    kartu[menuAktif-1].innerHTML = judul || ("Judul "+menuAktif);
+    if (indexVisual !== -1) {
+        kartu[indexVisual].innerHTML = judul || ("Judul " + menuAktif);
+    }
 
     alert("Data berhasil disimpan");
 }
