@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -65,6 +64,12 @@ button{
     color:black;
 }
 
+.logout-btn{
+    background:#e53935;
+    color:white;
+    margin-bottom:10px;
+}
+
 .ganti-btn{
     display:none;
     margin-top:10px;
@@ -112,18 +117,13 @@ button{
     border-radius:15px;
 }
 
-.content-box h2{
-    margin-bottom:15px;
-}
-
 textarea{
     width:100%;
     height:180px;
     padding:15px;
     border-radius:10px;
-    resize:none;
     margin-top:10px;
-    margin-bottom:10px;
+    resize:none;
 }
 
 .save-btn{
@@ -138,10 +138,8 @@ textarea{
 <body>
 
 <!-- LOGIN -->
-
 <div class="login-box" id="loginBox">
 
-```
 <h2>LOGIN DI SINI</h2>
 
 <input type="text"
@@ -150,30 +148,26 @@ placeholder="Masukkan ID">
 
 <input type="password"
 id="password"
-placeholder="Masukkan Password">
+placeholder="Masukkan Password"
+onkeydown="if(event.key==='Enter'){login();}">
 
-<button
-class="login-btn"
-onclick="login()">
-LOGIN
-</button>
+<button class="login-btn" onclick="login()">LOGIN</button>
 
-<button
-id="gantiPasswordBtn"
+<button id="gantiPasswordBtn"
 class="ganti-btn"
 onclick="gantiPassword()">
 GANTI PASSWORD
 </button>
 
 <p id="error"></p>
-```
 
 </div>
 
 <!-- MENU -->
-
 <div id="menuBebas" class="menu-bebas">
-```
+
+<button class="logout-btn" onclick="logout()">KELUAR</button>
+
 <div class="menu-grid">
 
     <div class="card" onclick="showContent(1)"><h3>Judul 1</h3></div>
@@ -197,23 +191,19 @@ GANTI PASSWORD
 
     <h2 id="menuTitle">Menu</h2>
 
-    <input
-    type="text"
+    <input type="text"
     id="judulInput"
     placeholder="Masukkan Judul">
 
-    <textarea
-    id="isiInput"
-    placeholder="Masukkan Isi Menu"></textarea>
+    <textarea id="isiInput"
+    placeholder="Masukkan Isi"></textarea>
 
-    <button
-    class="save-btn"
+    <button class="save-btn"
     onclick="simpanData()">
     SIMPAN
     </button>
 
 </div>
-```
 
 </div>
 
@@ -224,49 +214,44 @@ let menuAktif = 1;
 
 function login(){
 
-    let id =
-    document.getElementById("userid").value;
+    let id = document.getElementById("userid").value.trim();
+    let pass = document.getElementById("password").value.trim();
 
-    let pass =
-    document.getElementById("password").value;
+    if(id === "admin" && pass === passwordBenar){
 
-    if(id === "admin" &&
-       pass === passwordBenar){
-
-        document.getElementById("loginBox")
-        .style.display = "none";
-
-        document.getElementById("menuBebas")
-        .style.display = "block";
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBebas").style.display = "block";
 
     }else{
 
-        document.getElementById("error")
-        .innerHTML =
+        document.getElementById("error").innerHTML =
         "ID atau Password Salah!";
 
-        document.getElementById("gantiPasswordBtn")
-        .style.display = "block";
+        document.getElementById("gantiPasswordBtn").style.display =
+        "block";
     }
+}
+
+function logout(){
+
+    if(confirm("Yakin ingin keluar?")){
+
+        document.getElementById("menuBebas").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
+
+        document.getElementById("userid").value = "";
+        document.getElementById("password").value = "";
+
+    }
+
 }
 
 function gantiPassword(){
 
-    let passwordBaru =
-    prompt("Masukkan Password Baru");
+    let passwordBaru = prompt("Masukkan Password Baru");
 
-    if(passwordBaru &&
-       passwordBaru.trim() !== ""){
-
-        passwordBenar =
-        passwordBaru;
-
-        document.getElementById("error")
-        .innerHTML = "";
-
-        document.getElementById("gantiPasswordBtn")
-        .style.display = "none";
-
+    if(passwordBaru && passwordBaru.trim() !== ""){
+        passwordBenar = passwordBaru;
         alert("Password berhasil diganti");
     }
 }
@@ -275,69 +260,32 @@ function showContent(menu){
 
     menuAktif = menu;
 
-    document.getElementById("contentBox")
-    .style.display = "block";
+    document.getElementById("contentBox").style.display = "block";
 
-    document.getElementById("menuTitle")
-    .innerHTML =
-    "Menu " + menu;
+    document.getElementById("menuTitle").innerHTML = "Menu " + menu;
 
-    document.getElementById("judulInput")
-    .value =
+    document.getElementById("judulInput").value =
     localStorage.getItem("judul"+menu) || "";
 
-    document.getElementById("isiInput")
-    .value =
+    document.getElementById("isiInput").value =
     localStorage.getItem("isi"+menu) || "";
 }
 
 function simpanData(){
 
-    let judul =
-    document.getElementById("judulInput").value;
+    let judul = document.getElementById("judulInput").value;
+    let isi = document.getElementById("isiInput").value;
 
-    let isi =
-    document.getElementById("isiInput").value;
+    localStorage.setItem("judul"+menuAktif, judul);
+    localStorage.setItem("isi"+menuAktif, isi);
 
-    localStorage.setItem(
-    "judul"+menuAktif,
-    judul);
+    let kartu = document.querySelectorAll(".card h3");
 
-    localStorage.setItem(
-    "isi"+menuAktif,
-    isi);
-
-    let kartu =
-    document.querySelectorAll(".card h3");
-
-    kartu[menuAktif-1].innerHTML =
-    judul || ("Judul "+menuAktif);
+    kartu[menuAktif-1].innerHTML = judul || ("Judul "+menuAktif);
 
     alert("Data berhasil disimpan");
 }
 
-window.onload = function(){
-
-    let kartu =
-    document.querySelectorAll(".card h3");
-
-    for(let i=1;i<=12;i++){
-
-        let judul =
-        localStorage.getItem("judul"+i);
-
-        if(judul){
-
-            kartu[i-1].innerHTML =
-            judul;
-        }
-    }
-}
-<input
-type="password"
-id="password"
-placeholder="Masukkan Password"
-onkeypress="if(event.key==='Enter'){login();}">
 </script>
 
 </body>
